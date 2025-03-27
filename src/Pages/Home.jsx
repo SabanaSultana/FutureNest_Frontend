@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import OrphanageDetails from '../Components/OrphanageDetails';
 
 const Home = () => {
   return (
@@ -45,6 +46,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
+      <OrphanageDetails/>
     </div>
   );
 }
