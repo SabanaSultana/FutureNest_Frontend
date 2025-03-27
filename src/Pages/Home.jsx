@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar'
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import OrphanageDetails from '../Components/OrphanageDetails';
+import Footer from '../Components/Footer'
 
 const Home = () => {
   return (
@@ -47,6 +48,7 @@ const Home = () => {
         </div>
       </div>
       <OrphanageDetails/>
+      <Footer/>
     </div>
   );
 }
