@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -96,40 +96,38 @@ const orphanages = [
   },
 ];
 
+
+
 const OrphanageDetails = () => {
   return (
-    <div className="min-h-screen py-12 px-4 bg-blue-50 flex flex-col items-center">
-      <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">
-        Our Partner Orphanages
-      </h2>
-
-     
+    <div className="min-h-screen py-12 px-4 flex flex-col items-center bg-gray-100">
+      <h3 className="text-3xl font-bold text-center mb-8 text-black">
+        Find Your Future Family
+      </h3>
 
       <div className="w-full max-w-6xl px-4">
         <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={30}
+          modules={[Navigation, Pagination, Autoplay]}
+          loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          spaceBetween={20}
           slidesPerView={1}
           navigation
-          pagination={{
-            clickable: true,
-            renderBullet: (index, className) => {
-              return `<span class="${className}">${index + 1}</span>`;
-            },
-          }}
+          pagination={{ clickable: true }}
           breakpoints={{
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
           }}
           className="pb-16"
         >
           {orphanages.map((orphanage) => (
             <SwiperSlide key={orphanage.id}>
-              <div className="bg-white p-5 rounded-lg shadow-lg h-full flex flex-col ">
+              <div className="bg-white p-5 rounded-lg shadow-lg h-full flex flex-col">
                 <div className="mb-4 overflow-hidden rounded-lg h-48">
                   <img
                     src={orphanage.image}
@@ -140,20 +138,17 @@ const OrphanageDetails = () => {
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {orphanage.name}
                 </h3>
-                <p className="text-gray-600 mb-2">
-                  <span className="font-medium">📍</span> {orphanage.location}
-                </p>
-                <p className="text-gray-600 mb-3">
-                  <span className="font-medium">📞</span> {orphanage.contact}
-                </p>
-                <p className="text-gray-600 text-sm mb-4 flex-grow">
+                <p className="text-gray-600 mb-2">{orphanage.location}</p>
+                <p className="text-gray-600 mb-3">{orphanage.contact}</p>
+                
+                {/* <p className="text-gray-600 text-sm mb-4 flex-grow">
                   {orphanage.description}
-                </p>
-                <div className="flex space-x-2">
-                  <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-md text-sm font-medium transition-colors">
+                </p> */}
+                <div className="flex space-x-2 mt-auto">
+                  <button className="flex-1 bg-gray-800 hover:bg-gray-900 text-white py-2 px-3 rounded-md text-sm font-medium transition-colors">
                     Contact
                   </button>
-                  <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 px-3 rounded-md text-sm font-medium transition-colors">
+                  <button className="flex-1 border border-orangeCol text-black py-2 px-3 rounded-md text-sm font-medium transition-colors hover:bg-orangeCol hover:text-white">
                     Donate
                   </button>
                 </div>
@@ -164,7 +159,7 @@ const OrphanageDetails = () => {
       </div>
 
       <div className="mt-8 text-center">
-        <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-md font-semibold transition-colors">
+        <button className="bg-orangeCol hover:bg-orange-600 text-white px-8 py-3 rounded-md font-semibold transition-colors">
           Find More
         </button>
       </div>
