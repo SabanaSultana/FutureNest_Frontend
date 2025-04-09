@@ -5,8 +5,9 @@ import {
   FaMapMarkerAlt,
   FaInfoCircle,
 } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
+import logo from "../assets/logo_black.png";
 const AllDetails = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -29,7 +30,7 @@ const AllDetails = () => {
       image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620",
       description: "Specializing in trauma recovery and family services.",
     },
-    // Add more orphanages as needed...
+    
   ];
 
   // Filter orphanages based on search term
@@ -43,8 +44,15 @@ const AllDetails = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-200 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="min-h-screen bg-gray-200 py-8 px-4 sm:px-6 lg:px-8 flex ">
+        <div className="">
+          <img
+            src={logo}
+            alt="error loading logo image"
+            className="w-[170px] sm:w-[120px] md:w-[100px]"
+          />
+        </div>
+        <div className="max-w-7xl mx-auto ">
           <h1 className="text-4xl font-bold text-center text-black mb-8">
             Find the Orphanages here
           </h1>
@@ -124,17 +132,17 @@ const AllDetails = () => {
                           </p>
                         </div>
                         <div>
-                          
                           <p className="text-gray-600 font-bold ">
                             *We have 300 children in our organization.
                           </p>
                         </div>
                       </div>
-
+                    <Link to='/all-chldrn'>
                       <button className="mt-4 bg-blue-800 hover:bg-blue-700 text-white py-1.5 px-4 rounded-md text-sm flex items-center transition-colors">
                         <FaInfoCircle className="mr-1.5" />
                         Learn more about this Orphanage
                       </button>
+                    </Link>
                     </div>
                   </div>
                 </div>

@@ -11,8 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route path="/all" element={<Alldeatils/>}/>
-        <Route path="/all-children" element={<ChildrenList/>}/>
+        <Route path="/all-orphn" element={<Alldeatils/>}/>
+        <Route path="/all-chldrn" element={<ChildrenList/>}/>
         
       </Routes>
     </div>

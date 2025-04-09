@@ -29,7 +29,7 @@ const Navbar = () => {
         <img
           src={logo}
           alt="error loading logo image"
-          className="w-[150px] sm:w-[120px] md:w-[100px]"
+          className="w-[190px] sm:w-[160px] md:w-[130px]"
         />
         <button className="bg-orangeCol text-white/80 text-lg sm:text-xl rounded-md px-4 py-2">
           Register
