@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { FaSearch, FaBirthdayCake, FaVenusMars } from "react-icons/fa";
 import logo from "../assets/logo_black.png";
+import { Link } from "react-router-dom";
+
+
 const ChildrenList = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -73,41 +76,53 @@ const ChildrenList = () => {
         </div>
 
         {/* Display List of Children */}
-        <div className="space-y-4">
+        <div className="space-y-10">
           {filteredChildren.length > 0 ? (
-            filteredChildren.map((child) => (
+            filteredChildren.map((child, index) => (
               <div
                 key={child.id}
-                className="flex bg-white shadow-md rounded-lg p-4 items-center"
+                className={`flex flex-col md:flex-row ${
+                  index % 2 === 1 ? "md:flex-row-reverse" : ""
+                } bg-white shadow-lg rounded-2xl overflow-hidden p-6 items-center gap-8`}
               >
                 {/* Child Image */}
-                <img
-                  src={child.image}
-                  alt={child.name}
-                  className="w-20 h-20 rounded-full object-cover border"
-                />
+                <div className="w-full md:w-1/3 flex justify-center">
+                  <img
+                    src={child.image}
+                    alt={child.name}
+                    className="w-60 h-60 object-cover rounded-xl shadow-md"
+                  />
+                </div>
 
                 {/* Child Details */}
-                <div className="ml-4 flex-1">
-                  <h2 className="text-xl font-semibold text-gray-800">
+                <div className="w-full md:w-2/3 space-y-4">
+                  <h2 className="text-3xl font-bold text-gray-800">
                     {child.name}
                   </h2>
-                  <div className="text-gray-600 flex items-center">
-                    <FaBirthdayCake className="mr-2 text-orange-500" />
+                  <div className="text-lg text-gray-700 flex items-center">
+                    <FaBirthdayCake className="mr-3 text-orange-500 text-2xl" />
                     <span>{child.age} years old</span>
                   </div>
-                  <div className="text-gray-600 flex items-center">
-                    <FaVenusMars className="mr-2 text-purple-500" />
+                  <div className="text-lg text-gray-700 flex items-center">
+                    <FaVenusMars className="mr-3 text-purple-500 text-2xl" />
                     <span>{child.gender}</span>
                   </div>
-                  <p className="text-gray-500 text-sm">
-                    Joined: {child.joined}
+                  <p className="text-md text-gray-600">
+                    <span className="font-semibold">Joined:</span>{" "}
+                    {child.joined}
                   </p>
+                  <Link to="/child">
+                    <span className="inline-block mt-4 text-lg text-orangeCol font-semibold hover:underline">
+                      Know more about this child →
+                    </span>
+                  </Link>
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-600">No children found.</p>
+            <p className="text-center text-gray-600 text-xl">
+              No children found.
+            </p>
           )}
         </div>
 
