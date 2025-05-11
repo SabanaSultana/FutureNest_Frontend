@@ -5,6 +5,9 @@ import Alldeatils from "./Pages/Alldeatils"
 import ChildrenList from "./Pages/ChildrenList"
 import Child from "./Pages/Child"
 import Orphange_dashboard from "./Pages/dashboard/Orphange_dashboard"
+import Donor from "./Pages/dashboard/Donor"
+import Admin from "./Pages/dashboard/Admin"
+import Login from "./Pages/Login"
 function App() {
 
 
@@ -13,11 +16,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route path="/all-orphn" element={<Alldeatils/>}/>
-        <Route path="/all-chldrn" element={<ChildrenList/>}/>
+        <Route path="/orphanages" element={<Alldeatils/>}/>
+        <Route path="/children" element={<ChildrenList/>}/>
         <Route path="/child" element={<Child/>}/>
-        <Route path="/orphanages-dashboard" element={<Orphange_dashboard/>}/>     
-        
+        <Route path="/orphanage-dashboard" element={<Orphange_dashboard/>}/>  
+        <Route path="/donor-dashboard" element={<Donor/>}/>
+        <Route path="/admin-dashboard" element={<Admin/>}/>   
+        <Route path="/login" element={<Login/>}/>     
       </Routes>
     </div>
   )

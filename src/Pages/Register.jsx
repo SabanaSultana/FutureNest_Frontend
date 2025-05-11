@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import RegisterImg from "../assets/registerImg.jpg";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { setUserDetails } from "../Store/userSlice";
 import SummaryApi from "../Common/index";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setFlag } from "../Store/userSlice";
+// import { Link } from "react-router-dom";
 
 const Register = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize navigate hook
+  const navigate = useNavigate();
   const [userType, setUserType] = useState("Donor");
+  const dispatch = useDispatch();
   const orangeCol = "#FF6600";
 
   const [formData, setFormData] = useState({
@@ -46,7 +49,6 @@ const Register = () => {
       let config = {};
 
       if (userType === "Orphanage") {
-        // Use FormData for file upload
         payload = new FormData();
         payload.append("name", formData.name);
         payload.append("email", formData.email);
@@ -60,7 +62,6 @@ const Register = () => {
 
         config.headers = { "Content-Type": "multipart/form-data" };
       } else {
-        // Donor: send JSON
         payload = {
           ...formData,
           accountType: userType,
@@ -68,14 +69,28 @@ const Register = () => {
       }
 
       const res = await axios.post(SummaryApi.signUp.url, payload, config);
-      dispatch(setUserDetails(res.data.user));
-      alert("Registration successful!");
 
-      // Navigate to home route
-      navigate("/"); // This will navigate to the home route
+      if (res){
+        toast.success("Registration successful! Please login.", {
+          position: "top-center",
+        });
+        dispatch(setFlag(true));
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+
+      } else {
+        toast.error("Registration failed. Check console for details.", {
+          position: "top-center",
+        });   
+      }
+
+      
     } catch (err) {
       console.error(err.response?.data || err.message);
-      alert("Registration failed. Check the console for details.");
+      toast.error("Registration failed. Check console for details.", {
+        position: "top-center",
+      });
     }
   };
 
@@ -89,6 +104,7 @@ const Register = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
       <div className="w-full max-w-md p-6 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg">
         <h2
           className="text-2xl font-bold text-center"
@@ -217,6 +233,14 @@ const Register = () => {
           >
             Register
           </button>
+
+          <p className="text-center">
+            Already have an account ?{" "}
+            <Link to='/login'>
+              {" "}
+              <span className="text-orange-500 font-bold">Login</span>
+            </Link>
+          </p>
         </form>
       </div>
     </div>

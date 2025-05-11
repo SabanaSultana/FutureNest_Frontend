@@ -5,10 +5,25 @@ import backgroundImg3 from "../assets/children3.jpg";
 import logo from "../assets/logo2.png";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux"; // Import useSelector to access the Redux store
 
 const Navbar = () => {
   const images = [backgroundImg1, backgroundImg2, backgroundImg3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Access user details from the Redux store
+  const user = useSelector((state) => state.user.user); //
+  const flag= useSelector((state) => state.user.flag); // 
+  // const user = useSelector((state) => state.user);
+  console.log("Current User from Redux:", user); // Log user state directly
+
+  useEffect(() => {
+    if (user === null) {
+      console.log("User is not logged in");
+    } else {
+      console.log("User is logged in:", user);
+    }
+  }, [user]); // Monitor user state changes
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,16 +41,41 @@ const Navbar = () => {
       <div className="absolute inset-0 bg-black/65"></div>
 
       <div className="relative z-10 flex flex-row justify-between items-center w-[90vw] mx-auto p-4">
-        <img
-          src={logo}
-          alt="error loading logo image"
-          className="w-[190px] sm:w-[160px] md:w-[130px]"
-        />
-        <Link to="/register">
-          <button className="bg-orangeCol text-white/80 text-lg sm:text-xl rounded-md px-4 py-2">
-            Register
-          </button>
+        <Link to="/">
+          <img
+            src={logo}
+            alt="error loading logo image"
+            className="w-[190px] sm:w-[160px] md:w-[130px]"
+          />
         </Link>
+        {/* Check if user is logged in and conditionally render dashboard or register */}
+        {user ? (
+          <Link
+            to={
+              user.accountType === "Admin"
+                ? "/admin-dashboard"
+                : user.accountType === "Orphanage"
+                ? "/orphanage-dashboard"
+                :"/donor-dashboard" 
+            }
+          >
+            <button className="bg-orangeCol text-white/80 text-lg sm:text-xl rounded-md px-4 py-2">
+              Dashboard
+            </button>
+          </Link>
+        ) : flag ? (
+          <Link to="/login">
+            <button className="bg-orangeCol text-white/80 text-lg sm:text-xl rounded-md px-4 py-2">
+              Login
+            </button>
+          </Link>
+        ) : (
+          <Link to="/register">
+            <button className="bg-orangeCol text-white/80 text-lg sm:text-xl rounded-md px-4 py-2">
+              Register
+            </button>
+          </Link>
+        )}
       </div>
 
       <div className="relative z-10 text-white/95 flex flex-col items-center justify-center mt-6 gap-6 w-[60%] mx-auto text-center">
@@ -51,13 +91,19 @@ const Navbar = () => {
         </p>
       </div>
 
-      <Link to="/register">
+      {/* If user is not registered, show registration message. Otherwise, show thank you message */}
+      {user && user !== null ? (
         <div className="relative z-10 text-orange-500 flex flex-row justify-center items-center mt-10 font-semibold text-lg sm:text-xl md:text-2xl w-[60%] mx-auto text-center">
-        
-          <p>Please register yourself to join our community </p>
-          <MdOutlineArrowOutward />
+          <p>Thank you for joining with us</p>
         </div>
-      </Link>
+      ) : (
+        <Link to="/register">
+          <div className="relative z-10 text-orange-500 flex flex-row justify-center items-center mt-10 font-semibold text-lg sm:text-xl md:text-2xl w-[60%] mx-auto text-center">
+            <p>Please register yourself to join our community</p>
+            <MdOutlineArrowOutward />
+          </div>
+        </Link>
+      )}
     </div>
   );
 };
