@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar";
 import AddChildForm from "../../Components/AddChildrenForm";
 import TrackChildren from "../../Components/TrackChildren";
-import Analytics from "../../Components/Analytics"; // Create this component
-import OrganizationInfo from "../../Components/OrganizationInfo"; // Create this component
+import Analytics from "../../Components/Analytics"; 
+import OrganizationInfo from "../../Components/OrganizationInfo"; 
 
 const OrphanageDashboard = () => {
   const [view, setView] = useState("add");
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
-
+  const user  = useSelector((state) => state.user);
+ const accountType = user?.user?.accountType;
   useEffect(() => {
-    if (!user || user.accountType !== "Orphanage") {
+    if (!user || accountType !== "Orphanage") {
       navigate("/"); // Redirect to home if not Orphanage user
     }
   }, [user, navigate]);

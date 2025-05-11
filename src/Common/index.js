@@ -1,21 +1,29 @@
+
+import axios from "axios";
+
 const backendDomin = import.meta.env.VITE_BACKEND_URL;
 
 const SummaryApi = {
   signUp: {
     url: `${backendDomin}/api/v1/auth/signup`,
-    method: "post",
+    method: axios.post
   },
+  current_user: {
+    url: `${backendDomin}/api/v1/auth/current-user`,
+    method: axios.get
+  },
+
   sendOtp: {
     url: `${backendDomin}/api/v1/auth/sendotp`,
-    method: "post",
+    method: axios.post
   },
   login: {
     url: `${backendDomin}/api/v1/auth/login`,
-    method: "post",
+    method: axios.post
   },
   logout: {
     url: `${backendDomin}/api/v1/auth/logout`,
-    method: "post",
+    method:axios.post,
   },
   contactUs: {
     url: `${backendDomin}/api/v1/contact/contact-us`,

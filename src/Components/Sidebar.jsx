@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import SummaryApi from "../Common/index";
-import { clearUserDetails } from "../Store/userSlice";
+import { setUserDetails } from "../Store/userSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Sidebar = ({ setView, activeView }) => {
   const navigate = useNavigate();
@@ -18,21 +20,28 @@ const Sidebar = ({ setView, activeView }) => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post(SummaryApi.logout.url);
-      if (res.status === 200) {
-        alert("Logout successful");
-        dispatch(clearUserDetails()); // Dispatching action to clear user data
-        // console.log("User details after logout:", store.getState().user); // Log to check state
-        navigate("/"); // Redirect to homepage
+      const res = await SummaryApi.logout.method(SummaryApi.logout.url, {
+        withCredentials: true,
+      });
+
+      if (res.data && res.data.success) {
+        // alert("Logout successful");
+        toast.success("Logout successful", {
+          position: "top-center"})
+        dispatch(setUserDetails(null));
+        navigate("/");
       } else {
         console.error("Logout failed with status:", res.status);
+        toast.error("Logout failed. Please try again.", {
+          position: "top-center",
+        });
       }
+      
     } catch (error) {
       console.error("Logout error:", error.message);
     }
   };
-  
-  
+
   return (
     <aside className="w-full md:w-64 bg-gray-900 text-white p-4 md:p-6 flex flex-col justify-between h-screen">
       <div>

@@ -34,12 +34,12 @@ const Register = () => {
     }));
   };
 
-  const handleFileChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      photo: e.target.files[0],
-    }));
-  };
+  // const handleFileChange = (e) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     photo: e.target.files[0],
+  //   }));
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,9 +58,8 @@ const Register = () => {
         payload.append("confirmPassword", formData.confirmPassword);
         payload.append("purpose", formData.purpose);
         payload.append("accountType", userType);
-        // payload.append("photo", formData.photo);
 
-        config.headers = { "Content-Type": "multipart/form-data" };
+        config.headers = { "Content-Type": "application/json" };
       } else {
         payload = {
           ...formData,
@@ -68,24 +67,26 @@ const Register = () => {
         };
       }
 
-      const res = await axios.post(SummaryApi.signUp.url, payload, config);
+      const res = await SummaryApi.signUp.method(
+        SummaryApi.signUp.url,
+        payload,
+        config
+      );
+      console.log("res ", res);
 
-      if (res){
+      if (res.data.success) {
         toast.success("Registration successful! Please login.", {
           position: "top-center",
         });
-        dispatch(setFlag(true));
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
 
+        // dispatch(setFlag(true));
+
+        navigate("/login");
       } else {
         toast.error("Registration failed. Check console for details.", {
           position: "top-center",
-        });   
+        });
       }
-
-      
     } catch (err) {
       console.error(err.response?.data || err.message);
       toast.error("Registration failed. Check console for details.", {
@@ -236,7 +237,7 @@ const Register = () => {
 
           <p className="text-center">
             Already have an account ?{" "}
-            <Link to='/login'>
+            <Link to="/login">
               {" "}
               <span className="text-orange-500 font-bold">Login</span>
             </Link>

@@ -1,7 +1,7 @@
 const ROLE = {
-    ADMIN : "ADMIN",
-    DONOR : "DONOR",
-    ORPHANAGE:"ORPHANAGE",
+    ADMIN : "Admin",
+    DONOR : "Donor",
+    ORPHANAGE:"Orphanage",
 }
 
 export default ROLE

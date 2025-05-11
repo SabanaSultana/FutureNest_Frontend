@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import RegisterImg from "../assets/registerImg.jpg";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../Store/userSlice";
 import SummaryApi from "../Common/index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Context from "../Contexts/index";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const orangeCol = "#FF6600";
-
+  const { fetchUserDetails} = useContext(Context);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,14 +30,29 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(SummaryApi.login.url, formData);
-      dispatch(setUserDetails(res.data.user)); // Save user to Redux
+      const res = await SummaryApi.login.method(
+        SummaryApi.login.url,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, 
+        }
+      );
+      
 
-      toast.success("Login successful!", { position: "top-center" });
+      if (res.data.success) {
+        console.log("res ", res)
+        console.log("res.user",res.data.user);
+        // dispatch(setUserDetails(res.user)); // Save user to Redux
+        fetchUserDetails();
+        toast.success("Login successful!", { position: "top-center" });
 
-      setTimeout(() => {
-        navigate("/"); // Navigate to home page
-      }, 2000);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
     } catch (err) {
       console.error(err.response?.data || err.message);
       toast.error("Login failed. Check credentials.", {
@@ -91,6 +107,9 @@ const Login = () => {
           >
             Login
           </button>
+          <Link to="/register">
+           <p className="text-center m-1">Don't have an account? <span className="text-orange-500 font-bold ">Register</span></p>
+          </Link>
         </form>
       </div>
     </div>
