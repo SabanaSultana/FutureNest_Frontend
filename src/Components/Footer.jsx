@@ -97,7 +97,7 @@ const Footer = () => {
       {/* Copyright Section */}
       <div className="border-t border-white mt-8 pt-6 text-center text-sm">
         <p>
-          &copy; {new Date().getFullYear()} Hope For Children Foundation. All
+          &copy; {new Date().getFullYear()} FutureNest. All
           rights reserved.
         </p>
         <p className="mt-2">

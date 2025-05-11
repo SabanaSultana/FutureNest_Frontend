@@ -31,9 +31,11 @@ const Navbar = () => {
           alt="error loading logo image"
           className="w-[190px] sm:w-[160px] md:w-[130px]"
         />
-        <button className="bg-orangeCol text-white/80 text-lg sm:text-xl rounded-md px-4 py-2">
-          Register
-        </button>
+        <Link to="/register">
+          <button className="bg-orangeCol text-white/80 text-lg sm:text-xl rounded-md px-4 py-2">
+            Register
+          </button>
+        </Link>
       </div>
 
       <div className="relative z-10 text-white/95 flex flex-col items-center justify-center mt-6 gap-6 w-[60%] mx-auto text-center">
@@ -51,6 +53,7 @@ const Navbar = () => {
 
       <Link to="/register">
         <div className="relative z-10 text-orange-500 flex flex-row justify-center items-center mt-10 font-semibold text-lg sm:text-xl md:text-2xl w-[60%] mx-auto text-center">
+        
           <p>Please register yourself to join our community </p>
           <MdOutlineArrowOutward />
         </div>

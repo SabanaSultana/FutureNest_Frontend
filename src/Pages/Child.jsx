@@ -28,80 +28,67 @@ const Child = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="flex items-center justify-between mb-10">
-        <img src={logo} alt="FuturNest Logo" className="w-[150px] h-auto" />
+    <div className="min-h-screen bg-white">
+      <div className="bg-gray-900 text-white ">
+        <div className="flex items-center justify-between mb-10 ">
+          <img src={logo} alt="FuturNest Logo" className="w-[150px] h-auto" />
 
-        <div className="text-center w-full">
-          <h1 className="text-5xl font-bold text-white">
-            Meet the Star of FuturNest
-          </h1>
-          <p className="text-orange-500 font-semibold mt-2 text-lg">
-            "A journey of hope and dreams begins here"
-          </p>
+          <div className="text-center w-full">
+            <h1 className="text-5xl font-bold text-white">
+              Meet the Star of FuturNest
+            </h1>
+            <p className="text-orange-500 font-semibold mt-2 text-lg">
+              "A journey of hope and dreams begins here"
+            </p>
+          </div>
+        </div>
+        {/* About */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 pb-14 mb-12 max-w-6xl mx-auto px-6">
+          <div className="flex-1 max-w-xl text-lg leading-relaxed  space-y-3">
+            <h2 className="text-4xl font-bold mb-4">About Me</h2>
+            <p className="italic text-[20px]">
+              Hii, I am{" "}
+              <strong className="text-orange-500">{child.name}</strong>. I was
+              born on <strong className="text-orange-500">{child.born}</strong>,
+              and I am currently{" "}
+              <strong className="text-orange-500">{child.age} years</strong>{" "}
+              old. I joined the FuturNest family in{" "}
+              <strong className="text-orange-500">{child.joined}</strong>.
+            </p>
+            <p className="italic text-[20px]">
+              I am currently studying in{" "}
+              <strong className="text-orange-500">
+                {child.education.currentClass}
+              </strong>{" "}
+              at{" "}
+              <strong className="text-orange-500">
+                {child.education.school}
+              </strong>
+              . I love studying and recently achieved{" "}
+              <strong className="text-orange-500">
+                {child.education.merit}
+              </strong>{" "}
+              in my class.
+            </p>
+            <p className="italic text-[20px]">
+              I enjoy drawing, playing football, and learning new things every
+              day. I dream of becoming a scientist one day!
+            </p>
+          </div>
+
+          {/* Child Image */}
+          <div className="flex-1 flex justify-center">
+            <img
+              src={child.image}
+              alt={child.name}
+              className="rounded-[50%] w-[400px] h-[400px] object-cover border-[6px] border-white shadow-2xl shadow-black/40"
+            />
+          </div>
         </div>
       </div>
-      {/* About */}
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-6 mb-12 max-w-6xl mx-auto px-6">
-        <div className="flex-1 max-w-xl text-lg leading-relaxed  space-y-3">
-          <h2 className="text-4xl font-bold mb-4">About Me</h2>
-          <p className="italic text-[20px]">
-            Hii, I am <strong className="text-orange-500">{child.name}</strong>.
-            I was born on{" "}
-            <strong className="text-orange-500">{child.born}</strong>, and I am
-            currently{" "}
-            <strong className="text-orange-500">{child.age} years</strong> old.
-            I joined the FuturNest family in{" "}
-            <strong className="text-orange-500">{child.joined}</strong>.
-          </p>
-          <p className="italic text-[20px]">
-            I am currently studying in{" "}
-            <strong className="text-orange-500">
-              {child.education.currentClass}
-            </strong>{" "}
-            at{" "}
-            <strong className="text-orange-500">
-              {child.education.school}
-            </strong>
-            . I love studying and recently achieved{" "}
-            <strong className="text-orange-500">{child.education.merit}</strong>{" "}
-            in my class.
-          </p>
-          <p className="italic text-[20px]">
-            I enjoy drawing, playing football, and learning new things every
-            day. I dream of becoming a scientist one day!
-          </p>
-        </div>
-
-        {/* Child Image */}
-        <div className="flex-1 flex justify-center">
-          <img
-            src={child.image}
-            alt={child.name}
-            className="rounded-[50%] w-[400px] h-[400px] object-cover border-[6px] border-white shadow-2xl shadow-black/40"
-          />
-        </div>
-      </div>
-
-      {/* Documents */}
-      <div className="mb-10">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">
-          Education Documents
-        </h3>
-        <ul className="list-disc list-inside space-y-2 text-gray-700">
-          {child.documents.map((doc, index) => (
-            <li key={index}>
-              <a href={doc.url} className="text-orange-600 hover:underline">
-                {doc.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
       {/* Activity Video */}
-      <div className="mb-10">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">
+      <div className="m-14 ">
+        <h3 className="text-3xl font-bold text-gray-900 mb-4 border-b-2 pb-2 border-gray-400">
           Activity Video
         </h3>
         <video
@@ -113,10 +100,25 @@ const Child = () => {
         </video>
       </div>
 
+      {/* Documents */}
+      <div className="m-12 ">
+        <h3 className="text-3xl font-bold text-gray-900 mb-4 border-b-2 border-gray-400 pb-2">
+          Documents
+        </h3>
+        <ul className="list-disc list-inside space-y-2 text-gray-700">
+          {child.documents.map((doc, index) => (
+            <li key={index}>
+              <a href={doc.url} className="text-orange-700 hover:underline text-lg font-bold italic">
+                {doc.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10">
+      <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10 mb-10 pb-10">
         <button
-          className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg"
+          className="border-4 border-orange-500 text-black font-semibold py-2 px-6 rounded-lg"
           onClick={() => setShowModal(true)}
         >
           Donate
@@ -132,7 +134,7 @@ const Child = () => {
       {/* QR Code Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-xl relative w-[300px] text-center">
+          <div className=" p-6 rounded-xl relative w-[300px] text-center">
             <button
               className="absolute top-2 right-2 text-gray-700 hover:text-black"
               onClick={() => setShowModal(false)}

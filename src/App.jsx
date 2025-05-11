@@ -4,6 +4,7 @@ import Register from "./Pages/Register"
 import Alldeatils from "./Pages/Alldeatils"
 import ChildrenList from "./Pages/ChildrenList"
 import Child from "./Pages/Child"
+import Orphange_dashboard from "./Pages/dashboard/Orphange_dashboard"
 function App() {
 
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/all-orphn" element={<Alldeatils/>}/>
         <Route path="/all-chldrn" element={<ChildrenList/>}/>
         <Route path="/child" element={<Child/>}/>
+        <Route path="/orphanages-dashboard" element={<Orphange_dashboard/>}/>     
         
       </Routes>
     </div>
